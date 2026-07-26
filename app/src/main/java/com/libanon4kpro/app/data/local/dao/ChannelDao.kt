@@ -18,6 +18,12 @@ interface ChannelDao {
     @Query("SELECT * FROM channels WHERE isFavorite = 1 ORDER BY name ASC")
     fun observeFavorites(): Flow<List<ChannelEntity>>
 
+    @Query("SELECT DISTINCT groupName FROM channels WHERE groupName != '' ORDER BY groupName ASC")
+    fun observeGroups(): Flow<List<String>>
+
+    @Query("SELECT * FROM channels WHERE groupName = :groupName ORDER BY name ASC")
+    fun observeByGroup(groupName: String): Flow<List<ChannelEntity>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<ChannelEntity>)
 
@@ -27,3 +33,4 @@ interface ChannelDao {
     @Query("UPDATE channels SET isFavorite = :isFavorite WHERE id = :channelId")
     suspend fun setFavorite(channelId: Long, isFavorite: Boolean)
 }
+

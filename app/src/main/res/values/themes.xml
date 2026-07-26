@@ -1,5 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.LIBANON4KPRO" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/black</item>
+    <style name="Theme.LIBANON4KPRO" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:statusBarColor">@color/colorDarkBg</item>
+        <item name="android:navigationBarColor">@color/colorDarkBg</item>
+        <item name="android:windowBackground">@color/colorDarkBg</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="colorPrimary">@color/colorNeonBlue</item>
+        <item name="colorPrimaryDark">@color/colorDarkBg</item>
+        <item name="colorAccent">@color/colorNeonBlue</item>
+    </style>
+
+    <style name="Theme.LIBANON4KPRO.LiveTv" parent="Theme.LIBANON4KPRO">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="NeonButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:background">@drawable/bg_neon_button</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+    </style>
+
+    <style name="HomeCardStyle">
+        <item name="android:background">@drawable/bg_neon_card</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:clickable">true</item>
     </style>
 </resources>

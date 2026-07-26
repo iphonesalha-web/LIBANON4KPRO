@@ -19,7 +19,12 @@
             android:exported="false" />
         <activity
             android:name=".ui.player.PlayerActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ui.livetv.LiveTvActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LIBANON4KPRO.LiveTv" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true">
@@ -32,3 +37,4 @@
     </application>
 
 </manifest>
+

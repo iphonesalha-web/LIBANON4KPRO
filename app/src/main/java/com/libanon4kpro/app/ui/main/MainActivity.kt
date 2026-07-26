@@ -2,17 +2,14 @@ package com.libanon4kpro.app.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.libanon4kpro.app.databinding.ActivityMainBinding
 import com.libanon4kpro.app.databinding.DialogAddPlaylistBinding
-import com.libanon4kpro.app.ui.favorites.FavoritesActivity
-import com.libanon4kpro.app.ui.player.PlayerActivity
+import com.libanon4kpro.app.ui.livetv.LiveTvActivity
 import com.libanon4kpro.app.ui.settings.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,43 +19,44 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var adapter: ChannelAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupList()
-        setupActions()
+        setupCardActions()
+        setupTopActions()
         observeState()
     }
 
-    private fun setupList() {
-        adapter = ChannelAdapter(
-            onClick = { channel ->
-                startActivity(
-                    Intent(this, PlayerActivity::class.java)
-                        .putExtra(PlayerActivity.EXTRA_URL, channel.streamUrl)
-                        .putExtra(PlayerActivity.EXTRA_NAME, channel.name)
-                )
-            },
-            onFavoriteClick = { channel ->
-                viewModel.toggleFavorite(channel)
-            }
-        )
+    private fun setupCardActions() {
+        binding.cardLiveTv.setOnClickListener {
+            startActivity(Intent(this, LiveTvActivity::class.java))
+        }
 
-        binding.recyclerChannels.layoutManager = LinearLayoutManager(this)
-        binding.recyclerChannels.adapter = adapter
+        binding.cardMovies.setOnClickListener {
+            showComingSoonDialog("Movies")
+        }
+
+        binding.cardSeries.setOnClickListener {
+            showComingSoonDialog("TV Series")
+        }
+
+        binding.cardCatchUp.setOnClickListener {
+            showComingSoonDialog("Catch Up")
+        }
     }
 
-    private fun setupActions() {
+    private fun setupTopActions() {
         binding.btnAddPlaylist.setOnClickListener {
             showAddPlaylistDialog()
         }
-        binding.btnFavorites.setOnClickListener {
-            startActivity(Intent(this, FavoritesActivity::class.java))
+
+        binding.btnChangeServer.setOnClickListener {
+            showComingSoonDialog("Change Server")
         }
+
         binding.btnSettings.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
@@ -66,15 +64,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeState() {
         lifecycleScope.launch {
-            viewModel.channels.collect {
-                adapter.submitList(it)
-                binding.tvEmpty.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
-            }
-        }
-
-        lifecycleScope.launch {
-            viewModel.loading.collect {
-                binding.progressBar.visibility = if (it) View.VISIBLE else View.GONE
+            viewModel.loading.collect { loading ->
+                binding.progressBar.visibility =
+                    if (loading) android.view.View.VISIBLE else android.view.View.GONE
             }
         }
 
@@ -107,4 +99,13 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
+
+    private fun showComingSoonDialog(feature: String) {
+        AlertDialog.Builder(this)
+            .setTitle(feature)
+            .setMessage("$feature will be available in a future update.")
+            .setPositiveButton("OK", null)
+            .show()
+    }
 }
+

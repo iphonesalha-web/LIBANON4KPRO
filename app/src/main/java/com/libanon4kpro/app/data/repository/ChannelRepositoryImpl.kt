@@ -20,6 +20,12 @@ class ChannelRepositoryImpl @Inject constructor(
     override fun observeFavorites(): Flow<List<ChannelEntity>> =
         channelDao.observeFavorites()
 
+    override fun observeGroups(): Flow<List<String>> =
+        channelDao.observeGroups()
+
+    override fun observeByGroup(groupName: String): Flow<List<ChannelEntity>> =
+        channelDao.observeByGroup(groupName)
+
     override suspend fun importPlaylist(
         playlistName: String,
         playlistUrl: String
@@ -53,3 +59,4 @@ class ChannelRepositoryImpl @Inject constructor(
         channelDao.setFavorite(channelId, isFavorite)
     }
 }
+
