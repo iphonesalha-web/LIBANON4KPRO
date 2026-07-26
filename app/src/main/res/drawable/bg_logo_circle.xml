@@ -6,8 +6,7 @@
         android:gradientRadius="50%"
         android:startColor="@color/tv_accent_light"
         android:centerColor="@color/tv_accent"
-        android:endColor="@color/tv_logo_outer"
-        android:angle="135" />
+        android:endColor="@color/tv_logo_outer" />
     <stroke
         android:width="2dp"
         android:color="@color/tv_neon_cyan" />

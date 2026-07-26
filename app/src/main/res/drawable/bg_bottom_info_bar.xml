@@ -6,7 +6,4 @@
         android:angle="0"
         android:startColor="@color/tv_bottom_bar"
         android:endColor="#0A111827" />
-    <stroke
-        android:width="0dp"
-        android:color="@color/transparent" />
 </shape>
