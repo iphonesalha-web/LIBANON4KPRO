@@ -1,54 +1,418 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/bg_home_gradient"
+    android:focusable="false">
 
+    <!-- Top Bar: Logo + Title + Clock -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/layoutTopBar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/btnAddPlaylist"
+        <!-- App Logo / Identity -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAppTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_title"
+                android:textColor="@color/colorNeonBlue"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.1"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tvAppSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_subtitle"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="14sp"
+                android:letterSpacing="0.15" />
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Playlist" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        <Button
-            android:id="@+id/btnFavorites"
+            <TextView
+                android:id="@+id/btnAddPlaylist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_add_playlist"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="14sp"
+                android:background="@drawable/bg_neon_button_selector"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_add"
+                android:drawablePadding="6dp" />
+
+            <TextView
+                android:id="@+id/btnChangeServer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_change_server"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="14sp"
+                android:background="@drawable/bg_neon_button_selector"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="12dp"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_server"
+                android:drawablePadding="6dp" />
+
+            <TextView
+                android:id="@+id/btnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_settings"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="14sp"
+                android:background="@drawable/bg_neon_button_selector"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_marginStart="12dp"
+                android:focusable="true"
+                android:focusableInTouchMode="false"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_settings"
+                android:drawablePadding="6dp" />
+        </LinearLayout>
+
+        <!-- Clock -->
+        <TextClock
+            android:id="@+id/textClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Favorites" />
-
-        <Button
-            android:id="@+id/btnSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Settings" />
+            android:layout_marginStart="24dp"
+            android:textColor="@color/colorNeonBlue"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:format12Hour="hh:mm a"
+            android:format24Hour="HH:mm" />
     </LinearLayout>
 
+    <!-- Thin divider line -->
+    <View
+        android:id="@+id/dividerTop"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Main Feature Cards -->
+    <LinearLayout
+        android:id="@+id/layoutCards"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="12dp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/dividerTop"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Live TV Card -->
+        <LinearLayout
+            android:id="@+id/cardLiveTv"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_card_live_tv_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:clickable="true"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_live_tv"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_live_tv"
+                android:textColor="@color/colorCardLiveTv"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_live_tv_desc"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Movies Card -->
+        <LinearLayout
+            android:id="@+id/cardMovies"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_card_movies_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:clickable="true"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_movies"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_movies"
+                android:textColor="@color/colorCardMovies"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_movies_desc"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- TV Series Card -->
+        <LinearLayout
+            android:id="@+id/cardSeries"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_card_series_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:clickable="true"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_series"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_series"
+                android:textColor="@color/colorCardSeries"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_series_desc"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Catch Up Card -->
+        <LinearLayout
+            android:id="@+id/cardCatchUp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/bg_card_catchup_selector"
+            android:focusable="true"
+            android:focusableInTouchMode="false"
+            android:clickable="true"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_catchup"
+                android:contentDescription="@null" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_catchup"
+                android:textColor="@color/colorCardCatchUp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/card_catchup_desc"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Loading Overlay -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_marginTop="12dp" />
+        android:indeterminateTint="@color/colorNeonBlue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/tvEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No channels yet"
-        android:layout_marginTop="12dp" />
+    <!-- Bottom Status Bar -->
+    <LinearLayout
+        android:id="@+id/layoutBottomBar"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
+        android:background="@drawable/bg_bottom_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerChannels"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="16dp" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvStatusWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/status_welcome"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:ellipsize="end" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="@color/colorDivider"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_connected"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/tvStatusConnected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_connected"
+            android:textColor="@color/colorConnected"
+            android:textSize="12sp"
+            android:layout_marginStart="4dp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="@color/colorDivider"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:id="@+id/tvStatusServer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_server"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="@color/colorDivider"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <TextView
+            android:id="@+id/tvStatusExpire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_expire"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="@color/colorDivider"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp" />
+
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorNeonBlue"
+            android:textSize="12sp"
+            android:format12Hour="EEE, MMM d · hh:mm a"
+            android:format24Hour="EEE, MMM d · HH:mm" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

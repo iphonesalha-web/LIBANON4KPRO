@@ -1,4 +1,33 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- TV Neon Theme -->
+    <color name="colorDarkBg">#080818</color>
+    <color name="colorDarkBgGrad">#0E0E2A</color>
+    <color name="colorCardBg">#10102A</color>
+    <color name="colorCardBgFocused">#1C1C45</color>
+    <color name="colorNeonBlue">#00CCFF</color>
+    <color name="colorNeonBlueDark">#0055AA</color>
+    <color name="colorNeonGreen">#00FF88</color>
+    <color name="colorNeonGreenDark">#005533</color>
+    <color name="colorNeonPurple">#AA44FF</color>
+    <color name="colorNeonPurpleDark">#440088</color>
+    <color name="colorNeonOrange">#FF6600</color>
+    <color name="colorNeonOrangeDark">#882200</color>
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextSecondary">#AAAACC</color>
+    <color name="colorTextMuted">#666688</color>
+    <color name="colorStatusBarBg">#0A0A20</color>
+    <color name="colorButtonBg">#1A1A40</color>
+    <color name="colorButtonBgFocused">#2A2A60</color>
+    <color name="colorGroupSelected">#1A1A40</color>
+    <color name="colorGroupNormal">#0E0E28</color>
+    <color name="colorDivider">#222244</color>
+    <color name="colorConnected">#00FF88</color>
+    <color name="colorDisconnected">#FF4444</color>
+    <color name="colorCardLiveTv">#00CCFF</color>
+    <color name="colorCardMovies">#AA44FF</color>
+    <color name="colorCardSeries">#00FF88</color>
+    <color name="colorCardCatchUp">#FF6600</color>
 </resources>
