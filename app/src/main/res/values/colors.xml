@@ -1,4 +1,31 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- TV Dashboard palette -->
+    <color name="tv_bg_dark">#0A0E1A</color>
+    <color name="tv_bg_card">#111827</color>
+    <color name="tv_bg_card_alt">#0D1B2A</color>
+    <color name="tv_neon_blue">#00BFFF</color>
+    <color name="tv_neon_cyan">#00E5FF</color>
+    <color name="tv_neon_green">#00FF7F</color>
+    <color name="tv_neon_purple">#9B59B6</color>
+    <color name="tv_accent">#1565C0</color>
+    <color name="tv_accent_light">#1E88E5</color>
+    <color name="tv_text_primary">#FFFFFF</color>
+    <color name="tv_text_secondary">#B0BEC5</color>
+    <color name="tv_text_highlight">#00E5FF</color>
+    <color name="tv_divider">#1E3A5F</color>
+    <color name="tv_status_connected">#00FF7F</color>
+    <color name="tv_status_dot">#00E676</color>
+    <color name="tv_card_live">#0D2137</color>
+    <color name="tv_card_movies">#1A0D37</color>
+    <color name="tv_card_series">#0D2B1A</color>
+    <color name="tv_card_catchup">#2B1A0D</color>
+    <color name="tv_overlay_dark">#CC000000</color>
+    <color name="tv_border_neon">#003366</color>
+    <color name="tv_bottom_bar">#080C18</color>
+    <color name="tv_logo_outer">#1565C0</color>
+    <color name="tv_logo_inner">#0A0E1A</color>
+    <color name="transparent">#00000000</color>
 </resources>
